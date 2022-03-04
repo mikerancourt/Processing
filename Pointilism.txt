@@ -1,0 +1,123 @@
+//EXERCISE 4.3 Homework Part 1 and 2 combined. ORIGINAL CODE!
+//Draw a cool pointilism painting
+
+int xPos;
+int yPos;
+
+int scalarLowLimit;
+int scalarHighLimit;
+
+int radius;
+int radiusLowLimit;
+int radiusHighLimit;
+
+int circleWidth;
+int circleHeight;
+
+int circleWidthLowLimit;
+int circleWidthHighLimit;
+
+int circleHeightLowLimit;
+int circleHeightHighLimit;
+
+int xOffsetHighLimit;
+int xOffsetLowLimit;
+
+int yOffsetHighLimit;
+int yOffsetLowLimit;
+
+int r;
+int g;
+int b;
+int a;
+
+void setup()
+{
+  //change window size, and the built-in width and height variables will change.  And the ellipse/circle widths and heights should change too
+  size(1920, 1080);
+  background(50);
+  noStroke();
+
+  xPos = 0;
+  yPos = 0;
+  radius = 0;
+
+  scalarLowLimit = 5;
+  scalarHighLimit = 150;
+
+  //tweak these params and have fun!
+  radiusLowLimit = width / (width/scalarLowLimit);
+  radiusHighLimit = width / (width/scalarHighLimit);
+
+  circleWidth = 100;
+  circleWidthLowLimit = width / (width/scalarLowLimit);
+  circleWidthHighLimit = width / (width/scalarHighLimit);
+
+  circleHeight = 100;
+  circleHeightLowLimit = height / (height/scalarLowLimit);
+  circleHeightHighLimit = height / (height/scalarHighLimit);
+
+  //READ THIS:
+  //If you'd like some negative space to surround the dots, like a border, change following two lines
+  // FROM
+  //    xOffsetHighLimit = width + circleWidth;
+  // TO
+  //    xOffsetHighLimit = width - (circleWidth/2);
+
+  //AND
+
+  //FROM
+  //    xOffsetLowLimit = circleWidth/2;
+  //TO
+  //    xOffsetLowLimit = width - (circleWidth/2);
+
+
+  //Same logic applies for the yOffsetLowLimit and yOffsetHighLimit
+
+  //if you DO want the dots to paint on every available pixel, leave as is.
+
+  xOffsetHighLimit = width + circleWidth;
+  xOffsetLowLimit = -circleWidth;
+
+  //comment these two lines if you want circles/ellipses to draw offscreen
+  yOffsetHighLimit = height + circleHeight;
+  yOffsetLowLimit = -circleHeight;
+
+  r = 0;
+  g = 0;
+  b = 0;
+  a = 255;
+}
+
+void draw()
+{
+  //clear screen
+  if (mousePressed)
+  {
+    background(50);
+  }
+
+  //Ellipse 1: width and height can vary independently to give ellipses, not just circles
+  xPos = int(random(xOffsetLowLimit, xOffsetHighLimit));
+  yPos = int(random(yOffsetLowLimit, yOffsetHighLimit));
+  circleWidth = int(random(circleWidthLowLimit, circleWidthHighLimit));
+  circleHeight = int(random(circleHeightLowLimit, circleHeightHighLimit));
+  r = int(random(0, 255));
+  g = int(random(0, 255));
+  b = int(random(0, 255));
+  a = int(random(0, 255));
+  fill(r, g, b, a);
+
+  ellipse(xPos, yPos, circleWidth, circleHeight);
+
+  //Ellipse 2: Width and Height are locked with "radius" to make a circle
+  xPos = int(random(xOffsetLowLimit, xOffsetHighLimit));
+  yPos = int(random(yOffsetLowLimit, yOffsetHighLimit));
+  radius = int(random(radiusLowLimit, radiusHighLimit));
+  r = int(random(0, 255));
+  g = int(random(0, 255));
+  b = int(random(0, 255));
+  a = int(random(0, 255));
+  fill(r, g, b, a);
+  ellipse(xPos, yPos, radius, radius);
+}
