@@ -1,4 +1,5 @@
 
+//Global colors, just for ease of typing color names
 color red = color(255, 0, 0);
 color orange = color(255, 127, 0);
 color yellow = color(255, 255, 0);
@@ -7,6 +8,7 @@ color blue = color(0, 0, 255);
 color indigo = color(75, 0, 130);
 color violet = color(148, 0, 211);
 
+//How many bands of color we want and how wide each band should be
 int numBands;
 int bandWidth;
 
@@ -19,8 +21,10 @@ void setup()
 
 void draw()
 {
+  //clear frame every draw call
   background(24);
 
+  //logic
   if (mouseX > 6 * bandWidth)
   {
     fill(violet);
@@ -51,10 +55,11 @@ void draw()
     rect(0, 0, bandWidth, height);
   }
 
+  //Formatting the vertical lines, kind of like a state machine, or OpenGL
   strokeWeight(3);
   stroke(204);
   
-  
+  //Vertical lines that show users where the boundaries are, so when user's mouseX or mouseY crosses these boundaries, the colors changes
   line(bandWidth, 0, bandWidth, height);
   line(2*bandWidth, 0, 2*bandWidth, height);
   line(3*bandWidth, 0, 3*bandWidth, height);
