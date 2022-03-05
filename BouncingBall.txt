@@ -1,0 +1,75 @@
+/* 4.2 Bouncing Ball */
+
+//Globals
+float xPos;
+float yPos;
+
+float xSpeed;
+float ySpeed;
+
+float xDirection;
+float yDirection;
+
+float radius;
+float weight;
+float r = 0;
+float g = 0;
+float b = 0;
+float a = 0;
+
+void setup()
+{
+  size(640, 480);
+  xPos = 500;
+  yPos = 500;
+  radius = 20;
+  weight = 2;
+  
+  xSpeed = 5;
+  ySpeed = 2;
+  
+  xDirection = 1;
+  yDirection = 1;
+  
+  r = 21;
+  g = 194;
+  b = 245;
+  a = 127;
+  
+  //setting up the circle parameters once and only once, no need to update these every frame
+  stroke(255);
+  strokeWeight(weight);
+  fill(r, g, b, a);
+}
+
+void draw()
+{
+  //clear BG every frame
+  background(50);
+  
+  //Shape
+  ellipse(xPos, yPos, radius, radius);
+
+  //LOGIC
+  //Horizontal
+  if ( xPos >= (width - (radius / 2) - weight ) )
+    xDirection = -1;
+
+  if ( xPos <= ( (radius / 2) - weight ) )
+    xDirection = 1;
+    
+  //Vertical
+  if ( yPos >= (height - (radius / 2) - weight ) )
+    yDirection = -1;
+    
+  if ( yPos <= ( (radius / 2) - weight ) )
+    yDirection = 1;
+    
+  //Just a basic vector equation of "Ball's new position is equal to ball's old position(from previous frame) plus the speed of the ball multiplied by direction.  Very Sebastian Lague of me!
+  xPos = xPos + (xSpeed * xDirection);
+  yPos = yPos + (ySpeed * yDirection);
+  
+  //Debug stuff, can comment out
+  //System.out.println("x Position:" + xPos);
+  //System.out.println("y Position:" + yPos);
+}
