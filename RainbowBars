@@ -1,0 +1,64 @@
+
+color red = color(255, 0, 0);
+color orange = color(255, 127, 0);
+color yellow = color(255, 255, 0);
+color green = color(0, 255, 0);
+color blue = color(0, 0, 255);
+color indigo = color(75, 0, 130);
+color violet = color(148, 0, 211);
+
+int numBands;
+int bandWidth;
+
+void setup()
+{
+  size(1600, 900);
+  numBands= 7;
+  bandWidth = int(width/numBands);
+}
+
+void draw()
+{
+  background(24);
+
+  if (mouseX > 6 * bandWidth)
+  {
+    fill(violet);
+    rect(6*bandWidth, 0, bandWidth, height);
+  } else if (mouseX > 5 * bandWidth)
+  {
+    fill(indigo);
+    rect(5*bandWidth, 0, bandWidth, height);
+  } else if (mouseX > 4 * bandWidth)
+  {
+    fill(blue);
+    rect(4*bandWidth, 0, bandWidth, height);
+  } else if (mouseX > 3 * bandWidth)
+  {
+    fill(green);
+    rect(3*bandWidth, 0, bandWidth, height);
+  } else if (mouseX > 2 * bandWidth)
+  {
+    fill(yellow);
+    rect(2*bandWidth, 0, bandWidth, height);
+  } else if (mouseX > bandWidth)
+  {
+    fill(orange);
+    rect(bandWidth, 0, bandWidth, height);
+  } else
+  {
+    fill(red);
+    rect(0, 0, bandWidth, height);
+  }
+
+  strokeWeight(3);
+  stroke(204);
+  
+  
+  line(bandWidth, 0, bandWidth, height);
+  line(2*bandWidth, 0, 2*bandWidth, height);
+  line(3*bandWidth, 0, 3*bandWidth, height);
+  line(4*bandWidth, 0, 4*bandWidth, height);
+  line(5*bandWidth, 0, 5*bandWidth, height);
+  line(6*bandWidth, 0, 6*bandWidth, height);
+}
