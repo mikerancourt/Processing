@@ -1,6 +1,25 @@
-//EXERCISE 4.3 Homework Part 1 and 2 combined. ORIGINAL CODE!
-//Draw a cool pointilism painting
+//EXERCISE 4.3: Draw a cool pointilism painting
 
+/*
+READ THIS:
+ If you'd like some negative space to surround the dots, like a border, change following two lines
+ FROM
+ xOffsetHighLimit = width + circleWidth;
+ TO
+ xOffsetHighLimit = width - (circleWidth/2);
+ 
+ FROM
+ xOffsetLowLimit = circleWidth/2;
+ TO
+ xOffsetLowLimit = width - (circleWidth/2);
+ 
+ Same logic applies for the yOffsetLowLimit and yOffsetHighLimit
+ 
+ If you DO want the dots to paint on every available pixel, leave as is.
+*/
+
+
+//GLOBALS
 int xPos;
 int yPos;
 
@@ -57,25 +76,6 @@ void setup()
   circleHeightLowLimit = height / (height/scalarLowLimit);
   circleHeightHighLimit = height / (height/scalarHighLimit);
 
-  //READ THIS:
-  //If you'd like some negative space to surround the dots, like a border, change following two lines
-  // FROM
-  //    xOffsetHighLimit = width + circleWidth;
-  // TO
-  //    xOffsetHighLimit = width - (circleWidth/2);
-
-  //AND
-
-  //FROM
-  //    xOffsetLowLimit = circleWidth/2;
-  //TO
-  //    xOffsetLowLimit = width - (circleWidth/2);
-
-
-  //Same logic applies for the yOffsetLowLimit and yOffsetHighLimit
-
-  //if you DO want the dots to paint on every available pixel, leave as is.
-
   xOffsetHighLimit = width + circleWidth;
   xOffsetLowLimit = -circleWidth;
 
@@ -91,7 +91,7 @@ void setup()
 
 void draw()
 {
-  //clear screen
+  //clear screen and re-run after any mouse click
   if (mousePressed)
   {
     background(50);
@@ -107,10 +107,9 @@ void draw()
   b = int(random(0, 255));
   a = int(random(0, 255));
   fill(r, g, b, a);
-
   ellipse(xPos, yPos, circleWidth, circleHeight);
 
-  //Ellipse 2: Width and Height are locked with "radius" to make a circle
+  //Ellipse 2: Width and Height are locked to "radius" to make a circle
   xPos = int(random(xOffsetLowLimit, xOffsetHighLimit));
   yPos = int(random(yOffsetLowLimit, yOffsetHighLimit));
   radius = int(random(radiusLowLimit, radiusHighLimit));
