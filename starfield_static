@@ -1,0 +1,50 @@
+/* Static star field generator
+left-click to generate more stars*/
+
+int numStars = 500;
+int x = 0;
+int y = 0;
+int starRadius = 0;
+int starRadiusLow = 0;
+int starRadiusHigh = 5;
+
+int red = 0;
+int green = 0;
+int blue = 0;
+int alpha = 0;
+
+void setup()
+{
+  size(1600, 900);
+  background(0);
+  noStroke();
+}
+
+void draw()
+{
+
+  if (mousePressed)
+  {
+
+    for (int i = 0; i < numStars; i++)
+    {
+      starRadius = int(random(starRadiusLow, starRadiusHigh));
+      red = int(random(192, 255));
+      green = int(random(192, 255));
+      blue = int(random(192, 255));
+      alpha = int(random(0, 255));
+
+      if (starRadius > (starRadiusHigh / 2 ) )
+      {
+        red = int(random(204, 255));
+        green = int(random(204, 255));
+        blue = int(random(204, 255));
+        alpha = int(random(204, 255));
+      }
+
+      fill(red, green, blue, alpha);
+
+      ellipse(x + random(0, width), y + random(0, height), starRadius, starRadius);
+    }
+  }
+}
