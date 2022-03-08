@@ -1,0 +1,82 @@
+/* Random star field
+  made functions
+*/
+
+void setup()
+{
+  size(1920, 1080);
+  background(0);
+  noStroke();
+}
+
+void draw()
+{
+  if (mousePressed)
+  {
+    int numStars = 500;
+    generateStars(numStars);
+  }
+}
+
+//FUNCTION DEFS
+
+void generateStars(int numStars)
+{
+  int x = 0;
+  int y = 0;
+
+  for (int i = 0; i < numStars; i++)
+  {
+    int low = 1;
+    int high = 6;
+    int colorLow = 150;
+    int colorHigh = 255;
+
+    int starRadius = setStarRadius(low, high);
+
+    color starColor = setStarColor(colorLow, colorHigh);
+
+    int alpha = setStarAlpha();
+
+    if (starRadius > (high / 2 ) )
+    {
+      starColor = brightenStar();
+      alpha = brightenAlpha();
+      fill(starColor, alpha);
+    } else {
+      fill(starColor, alpha);
+    }
+
+    ellipse(x + random(0, width), y + random(0, height), starRadius, starRadius);
+  }
+}
+
+int setStarRadius(int low, int high)
+{
+  return int(random(low, high));
+}
+
+color setStarColor(int low, int high)
+{
+  int red = int(random(low, high));
+  int green = int(random(low, high));
+  int blue = int(random(low, high));
+  return color(red, green, blue);
+}
+
+int setStarAlpha()
+{
+  return int(random(0, 255));
+}
+
+color brightenStar()
+{
+  color brightColor = color( int(random(210, 255)), int(random(210, 255)), int(random(210, 255)) );
+  return brightColor;
+}
+
+int brightenAlpha()
+{
+  int brightAlpha = int(random(220, 255));
+  return brightAlpha;
+}
