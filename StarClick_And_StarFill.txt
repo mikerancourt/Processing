@@ -1,0 +1,73 @@
+void setup()
+{
+  size(1600, 900);
+  background(51);
+}
+
+void draw()
+{
+  boolean toggle = true;
+
+  while (mousePressed && toggle)
+  {
+    toggle = !toggle;
+    //MODE 1: Click and hold to fill with stars
+    //star( int(random(0, width)), int(random(0, height)) );
+    
+    //MODE 2: Click and drag for stars. Comment out one mode or the other
+    starClick(mouseX, mouseY);
+  }
+}
+
+void star(int x, int y)
+{
+  
+  //random rotation along Z-axis
+  rotate( random(0, TWO_PI));
+  
+  //star shape
+  pushMatrix();
+  scale(random(0.5, 2.0));
+  beginShape();
+  vertex(x, y-50);
+  vertex( x+14, y-20);
+  vertex( x+47, y-15);
+  vertex( x+23, y+7 );
+  vertex( x+29, y+40);
+  vertex( x, y+25);
+  vertex( x-29, y+40);
+  vertex( x-23, y+7);
+  vertex( x-47, y-15);
+  vertex( x-14, y-20);
+  endShape(CLOSE);
+  popMatrix();
+  
+  //random color and stroke/outline
+  strokeWeight(2);
+  stroke(255);
+  fill( int(random(0, 255)), int(random(0, 255)), int(random(0, 255)));
+}
+
+void starClick(int x, int y)
+{
+  //pushMatrix();
+  //scale(random(0.5, 2.0));
+  beginShape();
+  vertex(x, y-50);
+  vertex( x+14, y-20);
+  vertex( x+47, y-15);
+  vertex( x+23, y+7 );
+  vertex( x+29, y+40);
+  vertex( x, y+25);
+  vertex( x-29, y+40);
+  vertex( x-23, y+7);
+  vertex( x-47, y-15);
+  vertex( x-14, y-20);
+  endShape(CLOSE);
+  //popMatrix();
+  
+  //random color and stroke/outline
+  strokeWeight(2);
+  stroke(255);
+  fill( int(random(0, 255)), int(random(0, 255)), int(random(0, 255)));
+}
