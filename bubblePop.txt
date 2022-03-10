@@ -1,0 +1,146 @@
+/*9.1 Homework - Bubble Pop*/
+
+class BackgroundColor
+{
+  color bgColor;
+  
+  BackgroundColor(color bgColor)
+  {
+    this.bgColor = bgColor;
+  }
+}
+
+class Bubble extends BackgroundColor
+{
+  float x;
+  float xOffset;
+  float xSpeed;
+  float xDirection;
+
+  float y;
+  float yOffset;
+  float ySpeed;
+  float yDirection;
+
+  float offsetScalar = 10;
+  float diameterScalar = 20;
+
+  float diameter;
+  color bubbleColor;
+  color strokeColor= color(0);
+  float r;
+  float g;
+  float b;
+  
+  int randomDirection = int(random(0, 1));
+
+  Bubble(color bgColor)
+  {
+    super(bgColor);
+    xOffset = random( -width/offsetScalar, width/offsetScalar );
+    yOffset = random( 1, height / offsetScalar);
+
+    x = width / 2 + xOffset;
+    y = height - yOffset;
+
+    xSpeed = random(1, 5);
+    ySpeed = random(1, 5);
+
+    xDirection = random(-0.5, 0.5);
+    yDirection = 1;
+
+    diameter = random( (width/diameterScalar + height/diameterScalar)/5, (width/diameterScalar + height/diameterScalar));
+
+    bubbleColor = color(random(255), random(255), random(255), random(255));
+    strokeColor = color(0);
+    r = red(bubbleColor);
+    g = green(bubbleColor);
+    b = blue(bubbleColor);
+  }
+
+  void startMoving()
+  {
+    display();
+    ascend();
+    moveSideways();
+    onHover();
+    popBubble();
+  }
+
+  void display()
+  {
+    fill(bubbleColor);
+    stroke(strokeColor);
+    ellipse(x, y, diameter, diameter);
+  }
+
+  void ascend()
+  {
+    checkTop();
+    y -= ySpeed * yDirection;
+  }
+
+  void checkTop()
+  {
+    if (y < -diameter)
+      y = height + diameter;
+  }
+
+  void moveSideways()
+  {
+    checkSideways();
+    x += xSpeed * xDirection;
+  }
+
+  void checkSideways()
+  {
+    if (x < diameter/2 || x > width - diameter/2)
+      xDirection = -xDirection;
+  }
+
+
+  void onHover()
+  {
+    float distance = dist(mouseX, mouseY, this.x, this.y);
+    if (distance <= this.diameter)
+    {
+      this.strokeColor = color(255 - r, 255 - g, 255 - b);
+      this.diameter += 1;
+    }
+  }
+  
+  void popBubble()
+  {
+    if(this.diameter >= width/2 || this.diameter >= height/2)
+    {
+      this.strokeColor = bgColor;
+      stroke(strokeColor);
+      this.bubbleColor = color(bgColor);
+    }
+  }
+}
+
+int arrSize = 5;
+int myBGColor = color(255, 127, 20);
+
+ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+
+void setup()
+{
+
+  size(1600, 900);
+  background(myBGColor);
+  for (int i = 0; i < arrSize; i++)
+  {
+    bubbles.add(new Bubble(myBGColor));
+  }
+}
+
+void draw()
+{
+  background(myBGColor);
+  for (Bubble bubble : bubbles)
+  {
+    bubble.startMoving();
+  }
+}
