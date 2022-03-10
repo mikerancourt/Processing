@@ -1,0 +1,72 @@
+/* Array homework prompt: Convert Bubble object into array of Bubble objects */
+
+class Bubble
+{
+  float x;
+  float y;
+  float offset;
+  float diameter;
+  float xRandomDir;
+  color bubbleColor;
+
+  Bubble() {
+    offset = 10;
+    x = random(width-offset);
+    y = random(height-offset);
+    diameter = random(10, 100);
+    xRandomDir = random(-5, 5);
+    bubbleColor = color(random(255), random(255), random(255), random(24, 255));
+  }
+
+  void start() {
+    display();
+    top();
+    sides();
+  }
+
+  void display() {
+    strokeWeight(2);
+    fill(bubbleColor);
+    ellipse(x, y, diameter, diameter);
+  }
+
+  void ascend() {
+    x += xRandomDir;
+    y--;
+  }
+
+  void sides() {
+    if (x >= width + diameter || x <= -diameter)
+    {
+      xRandomDir = -xRandomDir;
+    }
+  }
+
+  void top() {
+    if (y >= -diameter)
+      ascend();
+    else
+      y = height + diameter;
+  }
+}
+
+Bubble[] bubbles = new Bubble[100];
+
+void setup()
+{
+  size(1600, 900);
+
+  for (int i = 0; i < bubbles.length; i++)
+  {
+    bubbles[i] = new Bubble();
+  }
+}
+
+void draw()
+{
+  background(24);
+  for (Bubble bubble : bubbles)
+  {
+    bubble.start();
+  }
+}
